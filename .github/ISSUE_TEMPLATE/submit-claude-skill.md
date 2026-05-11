@@ -1,6 +1,6 @@
 ---
-name: Submit a Skill
-about: Propose a new skill for the marketplace
+name: Submit a Claude Skill
+about: Propose a new Claude Code skill for the marketplace
 title: "[Skill] Your Skill Name"
 labels: submission, skill
 assignees: ''
@@ -16,9 +16,9 @@ assignees: ''
 
 ## Category
 
-<!-- Must match an id in registry/categories.yaml -->
+<!-- Must match an id in claude/registry/categories.yaml -->
 
-## Description (≤ 140 chars)
+## Description (<= 140 chars)
 
 ## What problem does it solve?
 
@@ -30,8 +30,8 @@ assignees: ''
 
 ## PR checklist
 
-- [ ] Copied from `templates/skill/`
+- [ ] Copied from `claude/templates/skill/`
 - [ ] `skill.md` frontmatter fully filled in
-- [ ] Entry added to `registry/index.yaml`
-- [ ] `node tools/validate.js` passes locally
+- [ ] Entry added to `claude/registry/index.yaml`
+- [ ] `cd claude/tools && npm install && node validate.js` passes locally
 - [ ] Tested in at least one real Claude Code session

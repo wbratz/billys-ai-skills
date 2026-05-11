@@ -1,6 +1,6 @@
 ---
-name: Submit a Plugin
-about: Propose a new plugin (MCP server, tool bundle, hook bundle) for the marketplace
+name: Submit a Claude Plugin
+about: Propose a new Claude Code plugin (MCP server, tool bundle, hook bundle) for the marketplace
 title: "[Plugin] Your Plugin Name"
 labels: submission, plugin
 assignees: ''
@@ -16,7 +16,7 @@ assignees: ''
 
 ## Category
 
-## Description (≤ 140 chars)
+## Description (<= 140 chars)
 
 ## What tools/capabilities does it expose?
 
@@ -25,7 +25,7 @@ assignees: ''
 ```json
 {
   "mcpServers": {
-    "your-plugin": { ... }
+    "your-plugin": {}
   }
 }
 ```
@@ -34,8 +34,8 @@ assignees: ''
 
 ## PR checklist
 
-- [ ] Copied from `templates/plugin/`
+- [ ] Copied from `claude/templates/plugin/`
 - [ ] `plugin.md` frontmatter fully filled in
-- [ ] Entry added to `registry/index.yaml`
-- [ ] `node tools/validate.js` passes locally
+- [ ] Entry added to `claude/registry/index.yaml`
+- [ ] `cd claude/tools && npm install && node validate.js` passes locally
 - [ ] Install instructions verified
