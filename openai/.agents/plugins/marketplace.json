@@ -1,0 +1,8 @@
+{
+  "name": "billys-openai-marketplace",
+  "interface": {
+    "displayName": "Billy's OpenAI Skills and Plugins"
+  },
+  "plugins": []
+}
+

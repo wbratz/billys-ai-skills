@@ -1,0 +1,42 @@
+{
+  "name": "todo-plugin-name",
+  "version": "0.1.0",
+  "description": "TODO brief plugin description",
+  "author": {
+    "name": "TODO author name",
+    "email": "TODO author@example.com",
+    "url": "TODO https://github.com/author"
+  },
+  "homepage": "TODO https://example.com/plugin",
+  "repository": "TODO https://github.com/owner/repo",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "skill"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "TODO Plugin Display Name",
+    "shortDescription": "TODO short description",
+    "longDescription": "TODO longer plugin description for details views.",
+    "developerName": "TODO developer name",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "TODO https://example.com",
+    "privacyPolicyURL": "TODO https://example.com/privacy",
+    "termsOfServiceURL": "TODO https://example.com/terms",
+    "defaultPrompt": [
+      "TODO run this plugin on the current task."
+    ],
+    "brandColor": "#10A37F",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "screenshots": []
+  }
+}

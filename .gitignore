@@ -1,0 +1,26 @@
+# Local agent/client state
+**/.claude/settings.local.json
+**/.codex/
+
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+
+# Dependency and build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Logs and caches
+*.log
+.cache/
+.tmp/
+tmp/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+

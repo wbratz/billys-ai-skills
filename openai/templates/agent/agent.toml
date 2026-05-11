@@ -1,0 +1,8 @@
+name = "todo_agent_name"
+description = "TODO describe when Codex should spawn this custom agent."
+developer_instructions = """
+TODO write narrow instructions for this custom agent.
+
+Keep the agent focused. State what it should do, what it should avoid, and what output shape it should return.
+"""
+nickname_candidates = ["TODO Agent"]

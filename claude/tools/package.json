@@ -1,0 +1,12 @@
+{
+  "name": "marketplace-tools",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "validate": "node validate.js",
+    "lint": "node validate.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

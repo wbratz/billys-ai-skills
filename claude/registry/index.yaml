@@ -1,0 +1,10 @@
+# Claude Skills & Agent Marketplace — Master Registry
+# Every published skill, agent, and plugin must have an entry here.
+# Fields: id, type, name, description, category, author, version, path, tags
+# See docs/registry-spec.md for the full schema.
+
+skills: []
+
+agents: []
+
+plugins: []

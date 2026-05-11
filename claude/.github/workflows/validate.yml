@@ -1,0 +1,30 @@
+name: Validate Registry
+
+on:
+  pull_request:
+    paths:
+      - 'registry/**'
+      - 'skills/**'
+      - 'agents/**'
+      - 'plugins/**'
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: tools
+        run: npm install
+
+      - name: Validate registry
+        working-directory: tools
+        run: node validate.js

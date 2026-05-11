@@ -1,0 +1,14 @@
+categories:
+  - id: dev-tools
+    name: Developer Tools
+  - id: research
+    name: Research
+  - id: automation
+    name: Automation
+  - id: productivity
+    name: Productivity
+  - id: agents
+    name: Agents
+  - id: mcp
+    name: MCP and Connectors
+
