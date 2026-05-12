@@ -7,4 +7,13 @@ skills: []
 
 agents: []
 
-plugins: []
+plugins:
+  - id: billys/rlm
+    type: plugin
+    name: RLM (Recursive Language Model)
+    description: Long-context analysis via recursive model loops over files, dirs, PDFs, logs, URLs, and corpora.
+    category: long-context
+    author: billys
+    version: 0.1.0
+    path: plugins/billys-rlm/plugin.md
+    tags: [rlm, long-context, pdf, corpus, agents, claude]

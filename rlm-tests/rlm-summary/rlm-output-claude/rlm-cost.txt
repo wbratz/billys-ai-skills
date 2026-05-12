@@ -1,0 +1,68 @@
+RLM Run — Cost Report
+=====================
+
+Target:    https://arxiv.org/html/2512.24601v2 (single URL, ~30 KB after HTML→markdown)
+Question:  Build three audience-tailored 30-minute meeting summaries (engineers, product, exec).
+Plan ID:   rlm-15906534
+Mode:      min  (single URL, no recursion needed)
+Runner:    rlm_native.py  (Claude-Code-native fallback — `rlms` Python package not installed)
+Date:      2026-05-11
+
+------------------------------------------------------------
+Planner's pre-run estimate
+------------------------------------------------------------
+  Range:               $0.14 – $0.72
+  Source:              rlm_plan.py output (rlm-15906534)
+  Model routing:       root=claude-sonnet-4-6, subagent=claude-haiku-4-5
+  Predicted fanout:    0 sub-LLM calls (single URL, fits in one chunk)
+  Token est.:          0 (planner couldn't size the URL until fetched)
+
+------------------------------------------------------------
+What actually ran
+------------------------------------------------------------
+  1. rlm_plan.py     — local Python, no API call            ~$0.00
+  2. rlm_health.py   — local Python, no API call            ~$0.00
+  3. rlm_native.py   — local Python, no API call            ~$0.00
+                       (emitted orchestration JSON only)
+  4. WebFetch        — 1 call, small/fast model, ~30 KB     ~$0.01 – $0.03
+                       HTML→markdown + extraction prompt
+  5. Synthesis       — 3 markdown files (~600–1000 words ea)
+                       Written by host (Opus 4.7, this convo)
+                       Rolled into the parent conversation's
+                       token usage — no separate line item.
+
+  Sub-LLM fan-out:   None (no Haiku calls — paper fit in one fetch)
+
+------------------------------------------------------------
+Honest cost estimate
+------------------------------------------------------------
+  External API spend (just the WebFetch call):     ~$0.01 – $0.03
+  Host-conversation tokens (writing 3 files):       ~$0.15 – $0.40
+                                                    (Opus 4.7 rates, rough)
+  -------------------------------------------------------
+  Approximate total:                                ~$0.16 – $0.43
+
+  Within the planner's predicted range ($0.14 – $0.72), at the low end.
+
+------------------------------------------------------------
+Caveats
+------------------------------------------------------------
+- This was native-fallback mode, not canonical RLM. The Python REPL
+  controller loop and fan-out machinery did NOT execute. The actual
+  work collapsed to "fetch URL once, write three summaries" — i.e.,
+  a normal long-context call, not a true RLM trajectory.
+- The Claude Code harness doesn't surface per-tool API cost; figures
+  above are estimates from token-sized work × published model rates,
+  not measured billing.
+- A real RLM trajectory (with `rlms` installed) on this same small
+  target would likely cost MORE than this fallback, not less, because
+  the controller loop adds overhead with little benefit on inputs
+  that already fit comfortably in one prompt. RLM's cost advantage
+  shows up at much larger input sizes.
+
+------------------------------------------------------------
+Trajectory artifacts
+------------------------------------------------------------
+  Plan output:        rlm-15906534
+  Orchestration log:  C:\dev\billys-ai-skills\.rlm\logs\rlm-native-cbf969a3.chunks.json
+  Output files:       engineers-meeting.md, product-meeting.md, exec-meeting.md

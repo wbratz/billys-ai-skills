@@ -1,0 +1,97 @@
+No-RLM Baseline Run — Cost Report
+=================================
+
+Target:    https://arxiv.org/html/2512.24601v2 (single URL, ~30 KB after HTML→markdown)
+Question:  Build three audience-tailored 30-minute meeting summaries (engineers, product, exec).
+Method:    Direct Opus run via Agent tool (no RLM, no recursion, no sub-agent fan-out)
+Model:     claude-opus-4-7  (fresh agent context — no carry-over from the RLM run)
+Date:      2026-05-11
+
+------------------------------------------------------------
+Run discipline (to keep it a fair baseline)
+------------------------------------------------------------
+- Single WebFetch only (one HTTP retrieval, one extraction prompt).
+- No sub-agents spawned.
+- No filesystem context outside the WebFetch result.
+- Same source URL and same task spec as the RLM run.
+- Agent had no access to the RLM run's outputs or extracted notes.
+
+------------------------------------------------------------
+Measured usage (from Claude Code harness)
+------------------------------------------------------------
+  Total tokens:      41,071
+  Tool uses:         6   (1 ToolSearch, 1 Bash, 1 WebFetch, 3 Write)
+  Wall-clock time:   221.5 seconds (~3.7 min)
+
+  Agent's own token breakdown (self-reported estimate):
+    Input  ~12–13K tokens
+    Output ~4.5–5K tokens
+    (System prompt + Agent harness overhead accounts for the rest of
+    the 41K total token count.)
+
+------------------------------------------------------------
+Honest cost estimate
+------------------------------------------------------------
+  Using rough Opus 4.7 published rates
+  (input ~$15/M tokens, output ~$75/M tokens — verify against your
+  current billing for an exact figure):
+
+    Input  side  ~35K tokens × $15/M    ~$0.53
+    Output side  ~6K tokens × $75/M     ~$0.45
+    -------------------------------------------
+    Approximate total:                   ~$0.95 – $1.05
+
+  Plus the WebFetch extraction call (small/fast model):   ~$0.01 – $0.03
+
+  Approximate total: ~$0.95 – $1.10
+
+------------------------------------------------------------
+Comparison vs. RLM run (same task, same source)
+------------------------------------------------------------
+                              RLM run         No-RLM baseline
+  --------------------------------------------------------------
+  Approximate cost            ~$0.16–$0.43    ~$0.95–$1.10
+  Tool calls                  ~6              6
+  Wall-clock                  not measured    ~3.7 min
+  Sub-LLM fan-out             0 (none)        0 (none)
+  Models doing the writing    Opus 4.7        Opus 4.7
+                              (host convo)    (fresh Agent)
+
+  Notable: the RLM "run" was native-fallback mode, so it ran no
+  controller loop and no fan-out. The actual writing work was the
+  same for both runs (one Opus model synthesizing from one fetched
+  document). The cost difference between the two columns reflects
+  conversation-vs-fresh-agent token overhead, NOT real RLM savings.
+
+------------------------------------------------------------
+What this comparison does and doesn't show
+------------------------------------------------------------
+  DOES show:
+  - The plumbing of the /rlm:rlm skill (plan -> approval -> health
+    -> orchestration JSON -> outputs) works end-to-end in fallback.
+  - On a tiny single-URL input, direct Opus produces good summaries
+    in one pass for ~$1.
+
+  DOES NOT show:
+  - Any real RLM cost advantage. To see that, the same baseline must
+    be re-run against a target that is too large for one prompt
+    (e.g., a directory, multi-PDF corpus, or a >200KB log) with
+    `rlms` installed so the canonical Python REPL controller runs.
+  - Quality differences. Both runs produced three meeting docs; a
+    side-by-side quality read should be done separately.
+
+------------------------------------------------------------
+Notes
+------------------------------------------------------------
+- The Claude Code harness does not surface per-call API spend, so
+  the dollar figures here are computed from token counts × published
+  rates, not measured billing.
+- Token counts are exact for the Agent run (reported by the harness:
+  41,071 total). Cost-per-token rates are approximate.
+
+------------------------------------------------------------
+Output files
+------------------------------------------------------------
+  engineers-meeting.md
+  product-meeting.md
+  exec-meeting.md

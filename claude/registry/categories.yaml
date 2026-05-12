@@ -45,3 +45,7 @@ categories:
   - id: integrations
     name: Integrations
     description: Third-party service connectors — Slack, Linear, GitHub, Jira, etc.
+
+  - id: long-context
+    name: Long Context & RAG
+    description: Workflows for processing context larger than a model's window — RLM, RAG, summarization pipelines.

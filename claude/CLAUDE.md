@@ -7,6 +7,7 @@ A community marketplace for Claude Code **skills**, **agents**, and **plugins** 
 ## Repo layout
 
 ```
+.claude-plugin/  Marketplace manifest (marketplace.json) — registers this repo as a Claude Code marketplace.
 skills/          One directory per skill. Each contains skill.md + README.md.
 agents/          One directory per agent definition. Each contains agent.md + README.md.
 plugins/         One directory per plugin (MCP servers, tool bundles). Contains plugin.md + README.md.
@@ -16,6 +17,15 @@ docs/            Authoring guides, registry spec, install instructions.
 tools/           CLI scripts: validate, publish, lint registry entries.
 .github/         Issue templates (submit-skill, submit-agent) and CI workflows.
 ```
+
+## Installing the marketplace in Claude Code
+
+```bash
+claude marketplace add <path-or-url-to-this-repo>
+claude plugin install <plugin-name>     # e.g. `rlm`
+```
+
+`.claude-plugin/marketplace.json` lists every available plugin. Every new plugin should be added there in the same PR as its registry entry.
 
 ## Key conventions
 

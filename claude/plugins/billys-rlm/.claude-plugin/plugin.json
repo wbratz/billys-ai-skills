@@ -1,0 +1,6 @@
+{
+  "name": "rlm",
+  "description": "Recursive Language Model workflows for long-context analysis over files, directories, PDFs, logs, URLs, and corpora.",
+  "version": "0.1.0",
+  "author": { "name": "billys" }
+}

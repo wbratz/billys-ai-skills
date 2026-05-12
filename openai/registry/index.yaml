@@ -1,2 +1,8 @@
-items: []
-
+items:
+  - id: rlm-codex
+    name: RLM Codex
+    type: plugin
+    category: research
+    path: ../plugins/rlm-codex
+    docs: ../docs/rlm-codex.md
+    description: Recursive Language Model workflows for long-context Codex analysis.

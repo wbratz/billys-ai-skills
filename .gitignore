@@ -9,18 +9,25 @@
 
 # Dependency and build output
 node_modules/
+.venv*/
 dist/
 build/
 coverage/
 
 # Logs and caches
 *.log
+*.py[cod]
+.pytest_cache/
+.rlm/
 .cache/
 .tmp/
+__pycache__/
 tmp/
+
+# Downloaded/generated research inputs
+rlm-tests/**/*.html
 
 # OS/editor noise
 .DS_Store
 Thumbs.db
 .vscode/
-

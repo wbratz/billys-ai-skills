@@ -1,0 +1,35 @@
+{
+  "name": "rlm-codex",
+  "version": "0.1.0",
+  "description": "Recursive Language Model workflows for long-context Codex analysis.",
+  "author": {
+    "name": "Billy's AI Skills"
+  },
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "rlm",
+    "long-context",
+    "research",
+    "recursive-analysis"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "RLM Codex",
+    "shortDescription": "Long-context recursive analysis for Codex.",
+    "longDescription": "Run Recursive Language Model workflows over corpora, logs, transcripts, and large repositories without stuffing all raw context into the Codex conversation.",
+    "developerName": "Billy's AI Skills",
+    "category": "Research",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "brandColor": "#10A37F",
+    "defaultPrompt": [
+      "Use RLM to answer this question over the selected files.",
+      "Use RLM to synthesize findings across this repository.",
+      "Use RLM to analyze these large logs or transcripts."
+    ],
+    "screenshots": []
+  }
+}

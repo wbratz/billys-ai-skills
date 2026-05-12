@@ -1,0 +1,4 @@
+{
+  "_comment": "Stub MCP server config. The v0.1 plugin ships scripts only; an optional rlm-mcp server is planned for v0.2 to expose rlm_run / rlm_inspect_trajectory / rlm_health as MCP tools.",
+  "mcpServers": {}
+}

@@ -1,0 +1,18 @@
+{
+  "name": "billys-ai-skills",
+  "owner": { "name": "billys" },
+  "metadata": {
+    "description": "Community marketplace for Claude Code skills, agents, and plugins.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "rlm",
+      "source": "./plugins/billys-rlm",
+      "description": "Recursive Language Model workflows for long-context analysis over files, dirs, PDFs, logs, URLs, and corpora.",
+      "version": "0.1.0",
+      "category": "long-context",
+      "tags": ["rlm", "long-context", "pdf", "corpus", "agents", "claude"]
+    }
+  ]
+}
