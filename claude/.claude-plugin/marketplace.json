@@ -13,6 +13,15 @@
       "version": "0.1.0",
       "category": "long-context",
       "tags": ["rlm", "long-context", "pdf", "corpus", "agents", "claude"]
+    },
+    {
+      "name": "rlm-auto",
+      "source": "./plugins/billys-rlm-auto",
+      "description": "Passive RLM routing: a hook auto-detects RLM-shaped tasks, runs RLM under a configurable cost cap, projects cost/speed/accuracy savings, and grades every decision locally for dogfood tuning. Requires the rlm plugin.",
+      "version": "0.1.0",
+      "category": "long-context",
+      "tags": ["rlm", "router", "hook", "cost", "evaluation", "passive", "dogfood", "claude"],
+      "requires": ["rlm"]
     }
   ]
 }

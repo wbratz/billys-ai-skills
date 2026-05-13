@@ -1,0 +1,6 @@
+{
+  "name": "rlm-auto",
+  "description": "Passive RLM routing: detects long-context tasks, auto-runs RLM under a configurable cost cap, projects savings vs. direct execution, and grades every decision locally to dogfood the routing heuristic. Requires the rlm plugin to be installed alongside.",
+  "version": "0.1.0",
+  "author": { "name": "billys" }
+}

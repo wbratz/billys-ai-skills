@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "min_size_bytes": 51200,
+  "min_file_count": 5,
+  "auto_approve_cap_usd": 0.50,
+  "ambiguous_band": {
+    "size_bytes_low": 30720,
+    "size_bytes_high": 51200
+  },
+  "kw_positive": [
+    "all of", "every", "across", "entire", "whole", "each of",
+    "aggregate", "sweep", "audit", "summarize all", "find every",
+    "analyze the corpus", "review the whole", "compare across"
+  ],
+  "kw_negative": [
+    "this file", "this function", "this line", "the current file",
+    "single line", "one file", "one function", "this method",
+    "this class", "rename", "typo", "fix the bug in", "edit this"
+  ],
+  "log_path": "~/.rlm/decisions.jsonl",
+  "log_full_prompts": false,
+  "show_footer": true,
+  "kill_switch_env": "RLM_AUTO_DISABLE"
+}
