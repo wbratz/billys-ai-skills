@@ -32,6 +32,43 @@ function loadYaml(filePath) {
   }
 }
 
+function walkFiles(directory, filename) {
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return walkFiles(fullPath, filename);
+    return entry.name === filename ? [fullPath] : [];
+  });
+}
+
+function validateSkillFrontmatter(filePath) {
+  const relativePath = path.relative(ROOT, filePath);
+  const content = fs.readFileSync(filePath, "utf8");
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+  if (!match) {
+    error(relativePath, "missing YAML frontmatter");
+    return;
+  }
+
+  let metadata;
+  try {
+    metadata = yaml.load(match[1]);
+  } catch (e) {
+    error(relativePath, `invalid YAML frontmatter: ${e.message}`);
+    return;
+  }
+  if (!metadata || typeof metadata.name !== "string" || !metadata.name.trim()) {
+    error(relativePath, "frontmatter requires a non-empty name");
+  }
+  if (
+    !metadata ||
+    typeof metadata.description !== "string" ||
+    !metadata.description.trim()
+  ) {
+    error(relativePath, "frontmatter requires a non-empty description");
+  }
+}
+
 const registry = loadYaml(REGISTRY_PATH);
 const categoriesData = loadYaml(CATEGORIES_PATH);
 const validCategories = new Set((categoriesData.categories || []).map((c) => c.id));
@@ -65,7 +102,7 @@ for (const [section, expectedType] of Object.entries(sections)) {
     }
 
     if (entry.category && !validCategories.has(entry.category)) {
-      error(ctx, `unknown category '${entry.category}' — add it to registry/categories.yaml first`);
+      error(ctx, `unknown category '${entry.category}' - add it to registry/categories.yaml first`);
     }
 
     if (entry.description && entry.description.length > 140) {
@@ -86,8 +123,12 @@ for (const [section, expectedType] of Object.entries(sections)) {
   }
 }
 
+for (const skillPath of walkFiles(path.join(ROOT, "plugins"), "SKILL.md")) {
+  validateSkillFrontmatter(skillPath);
+}
+
 if (errors.length > 0) {
-  console.error(`\nValidation failed — ${errors.length} error(s):\n`);
+  console.error(`\nValidation failed - ${errors.length} error(s):\n`);
   errors.forEach((e) => console.error(`  ✗ ${e}`));
   console.error();
   process.exit(1);
@@ -96,6 +137,6 @@ if (errors.length > 0) {
     (registry.skills || []).length +
     (registry.agents || []).length +
     (registry.plugins || []).length;
-  console.log(`Validation passed — ${total} registry entries OK.`);
+  console.log(`Validation passed - ${total} registry entries OK.`);
   process.exit(0);
 }

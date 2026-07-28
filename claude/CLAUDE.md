@@ -2,12 +2,12 @@
 
 ## What this repo is
 
-A community marketplace for Claude Code **skills**, **agents**, and **plugins** — reusable, installable capabilities that extend what Claude Code can do. Authors publish here; users discover and install from here.
+A community marketplace for Claude Code **skills**, **agents**, and **plugins** - reusable, installable capabilities that extend what Claude Code can do. Authors publish here; users discover and install from here.
 
 ## Repo layout
 
 ```
-.claude-plugin/  Marketplace manifest (marketplace.json) — registers this repo as a Claude Code marketplace.
+.claude-plugin/  Marketplace manifest (marketplace.json) - registers this repo as a Claude Code marketplace.
 skills/          One directory per skill. Each contains skill.md + README.md.
 agents/          One directory per agent definition. Each contains agent.md + README.md.
 plugins/         One directory per plugin (MCP servers, tool bundles). Contains plugin.md + README.md.
@@ -21,7 +21,7 @@ tools/           CLI scripts: validate, publish, lint registry entries.
 ## Installing the marketplace in Claude Code
 
 ```bash
-claude marketplace add <path-or-url-to-this-repo>
+claude plugin marketplace add <path-or-url-to-the-claude-directory>
 claude plugin install <plugin-name>     # e.g. `rlm`
 ```
 
@@ -31,13 +31,13 @@ claude plugin install <plugin-name>     # e.g. `rlm`
 
 - Every skill/agent/plugin lives in its own subdirectory named `{namespace}-{slug}` (e.g., `skills/commit-commands-commit/`).
 - The primary definition file is always named `skill.md`, `agent.md`, or `plugin.md`.
-- `registry/index.yaml` is the single source of truth for discovery — every merged item must have an entry there.
+- `registry/index.yaml` is the single source of truth for discovery - every merged item must have an entry there.
 - Namespaces are owned: once `foo:` is registered, only that author may publish under it.
 
 ## Working in this repo
 
 - **Adding a new skill**: copy `templates/skill/`, fill in the template, then add an entry to `registry/index.yaml`.
-- **Validation**: run `node tools/validate.js` before submitting a PR — CI will block merges that fail.
+- **Validation**: run `node tools/validate.js` before submitting a PR - CI will block merges that fail.
 - **Categories**: defined in `registry/categories.yaml`. Propose new ones via issue before using them.
 
 ## What Claude should do here

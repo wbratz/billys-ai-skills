@@ -1,6 +1,9 @@
 ---
 name: rlm-eval
-description: Local-only evaluator for rlm-auto routing decisions. Invoke on /rlm-auto:status, when the user asks "how accurate is the router?", "show me the false positives", or wants the dogfood report. Reads ~/.rlm/decisions.jsonl, attaches grades to any ungraded rows, and prints a summary plus a review queue of cases the grader was not confident about. Never sends anything off the machine.
+description: >-
+  Local-only evaluator for rlm-auto routing decisions. Invoke on
+  /rlm-auto:status, when the user asks about router accuracy or false positives,
+  or when they want the dogfood report. Never sends data off the machine.
 triggers:
   - "/rlm-auto:status"
   - "rlm-auto status"

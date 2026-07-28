@@ -8,7 +8,7 @@ Long-context analysis without stuffing the whole context into the model prompt. 
 
 ```bash
 # Option A: add the marketplace once, then install
-claude marketplace add <path-or-url-to-this-repo>
+claude plugin marketplace add <path-or-url-to-the-claude-directory>
 claude plugin install rlm
 
 # Option B: load this plugin directly
@@ -42,7 +42,7 @@ If any are missing, the command shows the exact install line. Nothing is install
 
 A controller model (Opus 4.7) gets a small system prompt and access to a Python REPL where your context lives in a `context` variable. It writes code to chunk and inspect the context, fires batched `llm_query` calls to Haiku 4.5 for extraction/classification/summary, and emits a final answer when done.
 
-This is **breadth, not depth** — parallel Haiku fanout beats deeper recursive trees on cost, latency, and quality. The plugin defaults reflect that.
+This is **breadth, not depth** - parallel Haiku fanout beats deeper recursive trees on cost, latency, and quality. The plugin defaults reflect that.
 
 ## Modes
 
@@ -72,4 +72,5 @@ agents/                Sub-agent for autonomous RLM runs
 
 ## Status
 
-v0.1 — Claude-only. OpenAI/Codex versions are out of scope for this plugin.
+v0.1, experimental. A separate Codex implementation is available in this
+repository under `openai/plugins/rlm-codex/`.

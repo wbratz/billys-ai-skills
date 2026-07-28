@@ -1,6 +1,9 @@
 ---
 name: rlm-estimate
-description: Renders a transparent cost/speed/accuracy estimate for an RLM vs. direct-execution decision. Invoke whenever a user asks "what did that cost?", "what would direct have cost?", "show me the estimate", or when the rlm-auto skill needs the footer numbers and the system reminder didn't carry them. Sources: published Anthropic rates, the RLM paper benchmarks, and once available the user's local decision history.
+description: >-
+  Renders a transparent cost, speed, and accuracy estimate for an RLM versus
+  direct-execution decision. Invoke when a user asks what it cost, what direct
+  execution would have cost, or when rlm-auto needs footer estimates.
 triggers:
   - "what did that cost"
   - "rlm estimate"

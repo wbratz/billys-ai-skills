@@ -2,7 +2,7 @@
   "name": "billys-ai-skills",
   "owner": { "name": "billys" },
   "metadata": {
-    "description": "Community marketplace for Claude Code skills, agents, and plugins.",
+    "description": "Production-minded RLM plugins for long-context Claude Code workflows.",
     "version": "0.1.0"
   },
   "plugins": [
@@ -20,8 +20,7 @@
       "description": "Passive RLM routing: a hook auto-detects RLM-shaped tasks, runs RLM under a configurable cost cap, projects cost/speed/accuracy savings, and grades every decision locally for dogfood tuning. Requires the rlm plugin.",
       "version": "0.1.0",
       "category": "long-context",
-      "tags": ["rlm", "router", "hook", "cost", "evaluation", "passive", "dogfood", "claude"],
-      "requires": ["rlm"]
+      "tags": ["rlm", "router", "hook", "cost", "evaluation", "passive", "dogfood", "claude"]
     }
   ]
 }

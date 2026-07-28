@@ -99,7 +99,7 @@ The 8 input shapes this plugin supports, with recommended config and loader for 
 
 **Sample prompts:**
 - "What chart trends are shown in this report? Which pages?"
-- "Read this scanned contract (OCR low quality) — extract parties and dates."
+- "Read this scanned contract (OCR low quality) - extract parties and dates."
 
 ## Cost & latency expectations (rough)
 

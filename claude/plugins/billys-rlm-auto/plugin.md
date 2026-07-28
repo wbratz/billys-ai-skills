@@ -1,13 +1,13 @@
 # rlm-auto
 
-**Passive Recursive-Language-Model routing for Claude Code.** Install once, then just use Claude Code normally — when a task is large/cross-document/corpus-shaped, this plugin silently routes it through RLM, surfaces an honest cost/speed/accuracy estimate, and grades its own decision afterwards. The grading log is local-only and is meant to be dogfooded back into the routing heuristic.
+**Passive Recursive-Language-Model routing for Claude Code.** Install once, then just use Claude Code normally - when a task is large/cross-document/corpus-shaped, this plugin silently routes it through RLM, surfaces an honest cost/speed/accuracy estimate, and grades its own decision afterwards. The grading log is local-only and is meant to be dogfooded back into the routing heuristic.
 
 ## Why install
 
 - **Stop thinking about when to use RLM.** A `UserPromptSubmit` hook classifies each task in <100 ms and tells Claude when RLM is the right tool.
 - **No "are you sure?" prompts under a budget cap.** Below a configurable threshold (default $0.50), RLM auto-executes. Above, you're asked once.
 - **Per-decision cost/speed/accuracy estimate** rendered into the answer so you always know what you spent (and what you saved vs. direct execution).
-- **Local-only decision log + post-hoc grader.** Every routing decision (RLM or not) is graded against the task's actual tool usage. `/rlm-auto:status` shows accuracy, false-positive rate, and savings to date — never leaves your machine.
+- **Local-only decision log + post-hoc grader.** Every routing decision (RLM or not) is graded against the task's actual tool usage. `/rlm-auto:status` shows accuracy, false-positive rate, and savings to date - never leaves your machine.
 - **Designed to be dogfooded.** The grader's "why-wrong" reasons feed directly into threshold tuning via `/rlm-auto:config`.
 
 ## What you don't need to know
@@ -42,7 +42,7 @@ The hook flags the prompt as RLM-shaped, the `rlm-auto` skill plans the run, see
 ## Tradeoffs we're honest about
 
 - The classifier is heuristic. It will misroute sometimes. The eval loop exists precisely to surface those cases so you can tune thresholds.
-- RLM has higher cost variance than a single Opus call. The auto-approve cap is the protection — set it to what you're comfortable burning on a misclassification.
+- RLM has higher cost variance than a single Opus call. The auto-approve cap is the protection - set it to what you're comfortable burning on a misclassification.
 - "Saves time" claims in the estimate are based on the source paper plus your local history; they are projections, not measurements.
 
 See `README.md` for installation, settings, threshold tuning, and the dogfood workflow.

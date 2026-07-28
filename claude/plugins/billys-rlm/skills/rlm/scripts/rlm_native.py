@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rlm_native.py — Claude-Code-native fallback when the `rlms` package is unavailable.
+rlm_native.py - Claude-Code-native fallback when the `rlms` package is unavailable.
 
 This does NOT implement true RLM. It produces a structured "instructions for the host agent"
 JSON that tells Claude Code how to simulate RLM using its own Agent/Task tooling:
@@ -58,7 +58,7 @@ def chunk_text(text: str, target_chunk_tokens: int = 4000) -> list[str]:
 
 def load_context_text(target: str, max_bytes: int | None) -> str:
     if target.startswith(("http://", "https://")):
-        return f"[URL not fetched in native mode — paste content or install rlms: {target}]"
+        return f"[URL not fetched in native mode - paste content or install rlms: {target}]"
     p = Path(target)
     if not p.exists():
         return ""
@@ -118,7 +118,7 @@ def main() -> None:
     instructions = {
         "ok": True,
         "mode_label": "claude-native-fallback",
-        "warning": "rlms not installed — running in native fallback mode. "
+        "warning": "rlms not installed - running in native fallback mode. "
                    "Recursion is prompt-level only; there is no Python REPL. "
                    "Install rlms (pip install rlms) and ensure Python 3.11+ for canonical RLM.",
         "plan_id": plan_id,

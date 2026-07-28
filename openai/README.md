@@ -1,45 +1,40 @@
-# Billy's OpenAI Skills and Plugins
+# OpenAI Codex Marketplace
 
-This folder is a Codex marketplace root and authoring workspace for OpenAI/Codex skills, plugins, custom subagents, and MCP tool bundles.
+This directory is the Codex marketplace root for Billy's AI Skills.
 
-## Install this marketplace locally
+## Install
 
-From `C:\dev\billys-ai-skills`:
+From the repository root:
 
 ```bash
 codex plugin marketplace add ./openai
 ```
 
-From inside this folder:
+From this directory:
 
 ```bash
 codex plugin marketplace add .
 ```
 
-Codex marketplace metadata lives at:
+Install `rlm-codex` from the added marketplace, then follow the
+[RLM Codex guide](docs/rlm-codex.md) for prerequisites, health checks, dry runs,
+local models, and live execution.
 
-```text
-.agents/plugins/marketplace.json
-```
+## Structure
 
-## Main folders
+- `.agents/plugins/marketplace.json`: Codex marketplace index
+- `plugins/rlm-codex/`: packaged RLM plugin and test suite
+- `docs/`: operating and marketplace documentation
+- `registry/`: human-readable plugin catalog
+- `AGENTS.md`: repository instructions for Codex contributors
 
-- `AGENTS.md`: Codex project instructions. This is the Codex equivalent of `CLAUDE.md`.
-- `.agents/plugins/marketplace.json`: local marketplace index for Codex plugins.
-- `.agents/skills/`: repo-maintenance skills that Codex can discover while working here.
-- `skills/`: standalone shareable Codex skills.
-- `plugins/`: packaged Codex plugins.
-- `agents/`: shared docs or published custom agent definitions.
-- `templates/`: starter scaffolds.
-- `registry/`: optional human-readable index and categories.
-- `docs/`: authoring docs.
-- `tools/`: future validation/publishing scripts.
+The repository-wide validation commands are documented in
+[`../CONTRIBUTING.md`](../CONTRIBUTING.md).
 
-## Official docs
+## Official documentation
 
-- Codex plugins: https://developers.openai.com/codex/plugins
-- Build Codex plugins: https://developers.openai.com/codex/plugins/build
-- Codex AGENTS.md: https://developers.openai.com/codex/guides/agents-md
-- Codex skills: https://developers.openai.com/codex/skills
-- Codex custom subagents: https://developers.openai.com/codex/subagents
-
+- [Codex plugins](https://developers.openai.com/codex/plugins)
+- [Build Codex plugins](https://developers.openai.com/codex/plugins/build)
+- [AGENTS.md](https://developers.openai.com/codex/guides/agents-md)
+- [Codex skills](https://developers.openai.com/codex/skills)
+- [Codex custom agents](https://developers.openai.com/codex/subagents)

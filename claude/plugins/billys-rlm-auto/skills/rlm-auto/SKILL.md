@@ -1,6 +1,9 @@
 ---
 name: rlm-auto
-description: Routes long-context / cross-document / corpus tasks through the rlm plugin automatically when the UserPromptSubmit hook flagged the task as RLM-shaped. Auto-approves below a configurable cost cap; otherwise surfaces a one-line approval prompt. Always attaches a short cost/savings footer to the final answer. Activated implicitly by an "rlm-auto:" system reminder from the hook - DO NOT invoke this skill unless that reminder is present.
+description: >-
+  Routes long-context, cross-document, and corpus tasks through the rlm plugin
+  when the UserPromptSubmit hook flags them as RLM-shaped. Invoke only when an
+  rlm-auto system reminder is present.
 triggers:
   - "rlm-auto: this task looks RLM-shaped"
   - "rlm-auto: this task is borderline"
@@ -129,5 +132,4 @@ grade it on session end.
 
 This skill calls `/rlm:rlm-plan` and `/rlm:rlm`. If those commands are
 not registered, the rlm plugin is not installed. Tell the user to
-install it (`claude plugin install rlm`) and abort the auto-routing —
-fall back to a normal direct flow for the current turn.
+install it (`claude plugin install rlm`) and abort the auto-routing - fall back to a normal direct flow for the current turn.

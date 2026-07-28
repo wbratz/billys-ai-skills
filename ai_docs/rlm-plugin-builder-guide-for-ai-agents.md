@@ -10,7 +10,7 @@ This document is written as an operational guide. It assumes the reader can edit
 Primary sources inspected:
 
 - RLM paper: https://arxiv.org/abs/2512.24601 and HTML v2 at https://arxiv.org/html/2512.24601v2
-- RLM implementation: https://github.com/alexzhang13/rlm, cloned locally at `C:\dev\rlm`, commit `03a1774`
+- RLM implementation: https://github.com/alexzhang13/rlm, reviewed at commit `03a1774`
 - RLM docs in this repository: `README.md`, `docs/architecture.md`, `docs/api/rlm.md`, examples, tests, and `AGENTS.md`
 - Claude Code plugin docs: https://code.claude.com/docs/en/plugins and https://code.claude.com/docs/en/plugins-reference
 - Codex plugin docs: https://developers.openai.com/codex/plugins and https://developers.openai.com/codex/plugins/build

@@ -1,6 +1,6 @@
 ---
 name: rlm
-description: Run an RLM (Recursive Language Model) workflow on a target — file, directory, PDF, URL, log, or corpus. Plans first, awaits approval, then executes.
+description: Run an RLM (Recursive Language Model) workflow on a target - file, directory, PDF, URL, log, or corpus. Plans first, awaits approval, then executes.
 argument-hint: <target> "<question>"
 ---
 

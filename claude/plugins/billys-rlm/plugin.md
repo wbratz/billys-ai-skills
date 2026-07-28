@@ -29,7 +29,7 @@ Run RLM workflows from inside Claude Code. The plugin wraps the upstream [`rlms`
 5. Website / URL (single page or bounded crawl)
 6. Structured extraction with page citations (contracts, medical, legal)
 7. Notebooks / JSONL / tabular dumps
-8. Multimodal docs — PDF pages as images for VLM subqueries
+8. Multimodal docs - PDF pages as images for VLM subqueries
 
 ## Install
 
@@ -63,8 +63,8 @@ See `skills/rlm/references/modes.md` for full details.
 
 | Mode | Root (depth 0) | Depth 1 | Depth 2 | `llm_query` |
 |---|---|---|---|---|
-| min | claude-sonnet-4-6 | — | — | claude-haiku-4-5-20251001 |
-| default | claude-opus-4-7 | claude-sonnet-4-6 | — | claude-haiku-4-5-20251001 |
+| min | claude-sonnet-4-6 | - | - | claude-haiku-4-5-20251001 |
+| default | claude-opus-4-7 | claude-sonnet-4-6 | - | claude-haiku-4-5-20251001 |
 | max | claude-opus-4-7 | claude-sonnet-4-6 | claude-haiku-4-5-20251001 | claude-haiku-4-5-20251001 |
 
 ## Notes
@@ -72,4 +72,4 @@ See `skills/rlm/references/modes.md` for full details.
 - Canonical mode requires Python 3.11+ and the `rlms` package. The runner validates both and prints clear remediation if missing.
 - Default sandbox is IPython subprocess for hard cell timeouts and namespace isolation.
 - Trajectory logs are JSONL under `.rlm/logs/` and gitignored by convention.
-- Final-answer parsing is brittle in RLM by design — the skill instructs the controller to prefer `FINAL_VAR(name)` over raw `FINAL(...)`.
+- Final-answer parsing is brittle in RLM by design - the skill instructs the controller to prefer `FINAL_VAR(name)` over raw `FINAL(...)`.
