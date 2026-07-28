@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rlm_health.py — capability probe for the RLM plugin.
+rlm_health.py - capability probe for the RLM plugin.
 
 Reports Python version, rlms availability, available backends, and sandbox support
 so the skill can decide whether to use the canonical runner or the Claude-native fallback.

@@ -2,7 +2,7 @@
 
 Passive RLM routing + cost/speed/accuracy estimator + local-only decision evaluator. Companion to the [`rlm`](../billys-rlm/) plugin.
 
-> **TL;DR.** Install both plugins (this one + `rlm`, which is required), copy the hooks block from `hooks/settings.json.example` into your `~/.claude/settings.json`, and use Claude Code normally. When a task is RLM-shaped, the plugin auto-routes through RLM under a budget cap (deterministic — checked by `scripts/check_cap.py`, not honor-system). Every decision (route OR pass-through) is graded locally. `/rlm-auto:status` shows you how well the heuristic is doing and what it cost.
+> **TL;DR.** Install both plugins (this one + `rlm`, which is required), copy the hooks block from `hooks/settings.json.example` into your `~/.claude/settings.json`, and use Claude Code normally. When a task is RLM-shaped, the plugin auto-routes through RLM under a budget cap (deterministic - checked by `scripts/check_cap.py`, not honor-system). Every decision (route OR pass-through) is graded locally. `/rlm-auto:status` shows you how well the heuristic is doing and what it cost.
 
 > **Dependency.** This plugin invokes the public `/rlm:rlm-plan` and `/rlm:rlm` slash commands from the `rlm` plugin. If `rlm` is not installed, the auto-routing skill aborts cleanly and the turn proceeds as if `rlm-auto` weren't installed.
 
@@ -12,7 +12,7 @@ Passive RLM routing + cost/speed/accuracy estimator + local-only decision evalua
 
 ```bash
 # 1. Add the marketplace if not already
-claude marketplace add <path-or-url-to-this-repo>
+claude plugin marketplace add <path-or-url-to-the-claude-directory>
 
 # 2. Install the base RLM plugin (required dependency)
 claude plugin install rlm
@@ -73,7 +73,7 @@ The three running layers are all local. No telemetry, no network calls from the 
 
 ## What gets logged
 
-`~/.rlm/decisions.jsonl` by default (one entry per decision, append-only). Override the location via `log_path` in `~/.rlm/auto-config.json` — e.g. `"log_path": "~/work/rlm-decisions.jsonl"`. Shape:
+`~/.rlm/decisions.jsonl` by default (one entry per decision, append-only). Override the location via `log_path` in `~/.rlm/auto-config.json` - e.g. `"log_path": "~/work/rlm-decisions.jsonl"`. Shape:
 
 ```json
 {
@@ -108,20 +108,20 @@ The three running layers are all local. No telemetry, no network calls from the 
 }
 ```
 
-The grader uses heuristics, not ground truth. When it marks `needs_review: true`, that's the dogfood signal — review those entries, decide if the heuristic was wrong, and tune.
+The grader uses heuristics, not ground truth. When it marks `needs_review: true`, that's the dogfood signal - review those entries, decide if the heuristic was wrong, and tune.
 
 ---
 
 ## Tuning (the dogfood loop)
 
 1. Run Claude Code normally for a week.
-2. `/rlm-auto:status` — see false-positive rate, false-negative rate, total spend, total estimated savings.
+2. `/rlm-auto:status` - see false-positive rate, false-negative rate, total spend, total estimated savings.
 3. `/rlm-auto:config` to adjust:
-   - `min_size_bytes` (default 50 KB) — the threshold below which RLM is overkill.
-   - `min_file_count` (default 5) — fewer than this and we route direct.
-   - `auto_approve_cap_usd` (default 0.50) — RLM auto-runs below this; asks above.
-   - `kw_positive`, `kw_negative` — keyword lists.
-   - `enabled` — kill switch.
+   - `min_size_bytes` (default 50 KB) - the threshold below which RLM is overkill.
+   - `min_file_count` (default 5) - fewer than this and we route direct.
+   - `auto_approve_cap_usd` (default 0.50) - RLM auto-runs below this; asks above.
+   - `kw_positive`, `kw_negative` - keyword lists.
+   - `enabled` - kill switch.
 
 Settings live in `~/.rlm/auto-config.json`. The defaults file (`config/defaults.json`) ships with the plugin.
 
@@ -130,8 +130,8 @@ Settings live in `~/.rlm/auto-config.json`. The defaults file (`config/defaults.
 ## Estimates are projections, not measurements
 
 The estimator pulls from two sources:
-1. **The RLM paper** — accuracy/cost numbers from BrowseComp-Plus and OOLONG (`source: "paper:..."`).
-2. **Your local decision log** — once you have >20 RLM decisions, the median measured cost replaces the paper number (`source: "local-history"`).
+1. **The RLM paper** - accuracy/cost numbers from BrowseComp-Plus and OOLONG (`source: "paper:..."`).
+2. **Your local decision log** - once you have >20 RLM decisions, the median measured cost replaces the paper number (`source: "local-history"`).
 
 Until you have local history, treat the savings number as a published-benchmark projection.
 
@@ -174,7 +174,7 @@ What stays local-only:
 - Prompts are hashed (SHA-256, first 16 hex chars) by default. Set `log_full_prompts: true` in `~/.rlm/auto-config.json` to opt in to verbatim local storage.
 - The hook scripts themselves never open a network socket.
 
-What the hook *does* send into the next API call (this is by design — it's how Claude sees the verdict):
+What the hook *does* send into the next API call (this is by design - it's how Claude sees the verdict):
 - The injected `<system-reminder>` includes the classification verdict, the matched signals (e.g. `dir ./reports = 14.2 MB`, `kw:every`), the score, and the cost/savings estimate. That reminder is part of the prompt and therefore travels with the next request to Anthropic, like any other prompt content.
 - If you don't want path names or detected keywords leaving the machine, set `enabled: false` via `/rlm-auto:disable --persistent`.
 
@@ -182,4 +182,4 @@ What the hook *does* send into the next API call (this is by design — it's how
 
 ## Status
 
-v0.1 — experimental. The classifier is intentionally conservative (favors false negatives over false positives) so the worst case is "Claude does what it would have done anyway".
+v0.1 - experimental. The classifier is intentionally conservative (favors false negatives over false positives) so the worst case is "Claude does what it would have done anyway".

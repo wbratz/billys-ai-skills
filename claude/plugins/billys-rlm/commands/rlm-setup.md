@@ -33,7 +33,7 @@ After displaying the status table:
 | `pypdf` | PDF loader |
 | `ANTHROPIC_API_KEY` | Canonical runner (API calls) |
 | `.rlm/logs/` writable | Trajectory logs |
-| `.gitignore` contains `.rlm/` | Best practice — keeps logs out of VCS |
+| `.gitignore` contains `.rlm/` | Best practice - keeps logs out of VCS |
 
 ## Manual full install (for reference)
 

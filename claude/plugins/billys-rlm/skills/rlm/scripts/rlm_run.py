@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rlm_run.py — canonical RLM runner (wraps the upstream `rlms` package).
+rlm_run.py - canonical RLM runner (wraps the upstream `rlms` package).
 
 Loads context via the loaders/, configures an RLM with mode-appropriate models,
 runs it under IPython subprocess by default, and emits a JSON result.
@@ -53,7 +53,7 @@ MODE_CONFIGS = {
 SYSTEM_PROMPT_ADDENDUM = """
 You are running inside an RLM loop. The full task context is in the REPL
 variable `context` (and `context_0`, `context_1`, ...). Do not assume the
-context fits in this prompt — inspect it from the REPL.
+context fits in this prompt - inspect it from the REPL.
 
 Rules:
 - Use llm_query_batched for parallel chunk extraction (cheap, fast).

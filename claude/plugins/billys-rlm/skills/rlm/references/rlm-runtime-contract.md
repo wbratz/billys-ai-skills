@@ -21,7 +21,7 @@ RLM.completion(prompt, root_prompt=None):
 ## What the controller sees per turn
 
 1. The RLM system prompt (provider-tuned).
-2. A metadata message — context type and character lengths only.
+2. A metadata message - context type and character lengths only.
 3. Its own previous response.
 4. For each executed `repl` block: a user message with the code, stdout/stderr, and a list of bound variable names.
 
@@ -46,8 +46,8 @@ SHOW_VARS()                              # debug helper
 
 Two ways to terminate:
 
-1. `FINAL(<answer text>)` — bare final, brittle parsing.
-2. `FINAL_VAR(name)` — emit the value bound to variable `name`. **Preferred.**
+1. `FINAL(<answer text>)` - bare final, brittle parsing.
+2. `FINAL_VAR(name)` - emit the value bound to variable `name`. **Preferred.**
 
 The skill instructs the controller to always create a named variable first and emit `FINAL_VAR(name)` for stability.
 
@@ -79,8 +79,8 @@ Depth 2+ falls back to the default model unless the executing code passes an exp
 
 ## Known limitations to respect
 
-- `LocalREPL` has `open()` and `__import__` — it's **not** a sandbox.
+- `LocalREPL` has `open()` and `__import__` - it's **not** a sandbox.
 - Compaction only works in environments that implement `append_compaction_entry` (currently `local` in upstream). Don't enable `compaction=True` with IPython without verifying.
-- `socket_recv` in `comms_utils.py` reads the 4-byte length prefix with a single `recv(4)` — can fail on partial TCP reads. Upstream hardening pending.
+- `socket_recv` in `comms_utils.py` reads the 4-byte length prefix with a single `recv(4)` - can fail on partial TCP reads. Upstream hardening pending.
 - Provider clients and usage counters may not be thread-safe at high parallelism. Our `max` mode (concurrency=12) is the upper bound we've audited.
-- `RLM._fallback_answer` returns a raw string when `depth >= max_depth` — the runner normalizes this.
+- `RLM._fallback_answer` returns a raw string when `depth >= max_depth` - the runner normalizes this.

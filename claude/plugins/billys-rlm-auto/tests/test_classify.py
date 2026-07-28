@@ -134,6 +134,15 @@ class ClassifierTests(unittest.TestCase):
         # Must successfully find the dir (size>0)
         self.assertGreater(result["totals"]["size_bytes"], 0, msg=str(result))
 
+    def test_relative_backslash_path_is_categorized(self):
+        d = _make_big_dir(self.root)
+        relative = str(d.relative_to(self.root)).replace("/", "\\")
+        result = classify(
+            f"audit all files in .\\{relative}",
+            cwd=str(self.root),
+        )
+        self.assertGreater(result["totals"]["size_bytes"], 0, msg=str(result))
+
     # ---- Globs ----
 
     def test_glob_pattern_adds_signal(self):

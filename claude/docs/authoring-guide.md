@@ -29,7 +29,7 @@ Examples: `billyz-git-autopilot`, `acme-linear-triage`.
 Edit `skill.md` (or `agent.md` / `plugin.md`):
 
 - **Frontmatter**: set all required fields (name, description, version, author, category, tags).
-- **Body**: write the skill's instructions as if briefing Claude directly — be specific about steps, inputs, outputs, and edge cases.
+- **Body**: write the skill's instructions as if briefing Claude directly - be specific about steps, inputs, outputs, and edge cases.
 
 ## 4. Add a registry entry
 
@@ -57,11 +57,11 @@ Fix any errors before opening a PR. CI will run the same check.
 
 ## 6. Open a PR
 
-Use the "Submit Skill", "Submit Agent", or "Submit Plugin" issue/PR template. Fill in every section — incomplete submissions will be closed without review.
+Use the "Submit Skill", "Submit Agent", or "Submit Plugin" issue/PR template. Fill in every section - incomplete submissions will be closed without review.
 
 ## Authoring tips
 
-- **Triggers matter**: if your skill has natural trigger phrases ("when the user says X"), list them — they make the skill discoverable without remembering the slash command.
+- **Triggers matter**: if your skill has natural trigger phrases ("when the user says X"), list them - they make the skill discoverable without remembering the slash command.
 - **Scope tightly**: a skill that does one thing well beats a skill that tries to do five.
 - **No hardcoded paths**: write skills that work in any repo, not just yours.
 - **Version correctly**: bump the patch version for fixes, minor for new behavior, major for breaking changes.

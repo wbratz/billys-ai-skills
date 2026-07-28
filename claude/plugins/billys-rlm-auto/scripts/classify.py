@@ -33,6 +33,7 @@ PATH_RE = re.compile(r"""(?xi)
     (?:                                # absolute or relative path
         [A-Za-z]:[\\/][^\s'"<>|]+      # Windows abs (C:\... or C:/...)
       | /[^\s'"<>|]+                   # Unix abs
+      | \\[^\s'"<>|]+                  # root path copied with backslashes
       | \.[\\/][^\s'"<>|]+             # explicit relative (./... or .\...)
       | \.\.[\\/][^\s'"<>|]+           # parent relative
       | (?:[\w\-.]+[\\/]){1,}[\w\-.]+  # bare relative (foo/bar or foo\bar)
@@ -93,6 +94,28 @@ def _path_size_bytes(p: Path, cap_bytes: int = 50_000_000) -> tuple[int, int]:
     return total, count
 
 
+def _resolve_prompt_path(raw: str, base: Path) -> Path | None:
+    """Resolve a prompt path, including foreign separator styles.
+
+    Prompts are often copied between operating systems. A Windows-style
+    backslash path should still identify an existing local path when the
+    classifier runs on macOS or Linux, and vice versa.
+    """
+    candidates = [raw]
+    if os.sep == "/" and "\\" in raw:
+        candidates.append(raw.replace("\\", "/"))
+    elif os.sep == "\\" and "/" in raw:
+        candidates.append(raw.replace("/", "\\"))
+
+    for candidate in dict.fromkeys(candidates):
+        path = Path(candidate)
+        if not path.is_absolute():
+            path = base / path
+        if path.exists():
+            return path
+    return None
+
+
 def classify(prompt: str, cwd: str | None = None) -> dict:
     cfg = load_config()
     if not cfg.get("enabled", True):
@@ -119,10 +142,8 @@ def classify(prompt: str, cwd: str | None = None) -> dict:
         if raw in seen_paths:
             continue
         seen_paths.add(raw)
-        p = Path(raw)
-        if not p.is_absolute():
-            p = base / raw
-        if not p.exists():
+        p = _resolve_prompt_path(raw, base)
+        if p is None:
             continue
         sz, n = _path_size_bytes(p)
         total_bytes += sz

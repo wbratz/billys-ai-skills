@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rlm_plan.py — produce a plan for an RLM run without executing it.
+rlm_plan.py - produce a plan for an RLM run without executing it.
 
 Inspects the target, classifies it, recommends a mode, computes estimated
 cost/fanout, and emits both human-readable text and JSON.

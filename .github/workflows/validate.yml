@@ -1,17 +1,12 @@
-name: Validate Claude Registry
+name: Validate marketplaces
 
 on:
   pull_request:
-    paths:
-      - "claude/registry/**"
-      - "claude/skills/**"
-      - "claude/agents/**"
-      - "claude/plugins/**"
-      - "claude/templates/**"
-      - "claude/tools/**"
-      - ".github/workflows/validate.yml"
   push:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
@@ -19,15 +14,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: claude/tools/package-lock.json
 
-      - name: Install dependencies
-        working-directory: claude/tools
-        run: npm ci
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      - name: Validate registry
-        working-directory: claude/tools
-        run: node validate.js
+      - name: Install validator dependencies
+        run: npm ci --prefix claude/tools
+
+      - name: Audit production dependencies
+        run: npm audit --prefix claude/tools --omit=dev
+
+      - name: Validate marketplace contracts
+        run: |
+          npm run validate --prefix claude/tools
+          python3 scripts/validate_repository.py
+
+      - name: Test Claude automatic routing
+        run: python3 -m unittest discover -s claude/plugins/billys-rlm-auto/tests -p "test_*.py" -v
+
+      - name: Test Codex RLM runner
+        run: python3 -m unittest discover -s openai/plugins/rlm-codex/tests -p "test_*.py" -v
+
+      - name: Compile Python sources
+        run: python3 -m compileall -q claude/plugins openai/plugins

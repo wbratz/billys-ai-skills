@@ -21,8 +21,8 @@ You orchestrate an RLM run from start to finish: target detection, plan generati
 
 - `target`: file path, directory path, URL, or glob
 - `question`: the user's question or task
-- `mode_hint`: optional — `min` | `default` | `max` | `auto` (default: `auto`)
-- `approval_token`: optional — if the spawning agent has user pre-approval, pass `"pre-approved"`; otherwise this agent will display the plan and require explicit approval text in its return value
+- `mode_hint`: optional - `min` | `default` | `max` | `auto` (default: `auto`)
+- `approval_token`: optional - if the spawning agent has user pre-approval, pass `"pre-approved"`; otherwise this agent will display the plan and require explicit approval text in its return value
 
 ## Behavior
 
@@ -74,7 +74,7 @@ You orchestrate an RLM run from start to finish: target detection, plan generati
 
 - Never bypass the approval gate unless `approval_token=="pre-approved"`.
 - Never embed `ANTHROPIC_API_KEY` in prompts or context.
-- If `secret_scan.hits` is non-empty, surface a warning before executing — do not strip silently.
+- If `secret_scan.hits` is non-empty, surface a warning before executing - do not strip silently.
 - If the canonical runner exits non-zero, do NOT silently fall back to native. Surface the error to the spawning agent.
 - Budget: if mode=max, require `--max-budget` is present.
 

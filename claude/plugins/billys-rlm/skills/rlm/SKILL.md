@@ -14,7 +14,7 @@ triggers:
 
 # RLM Skill
 
-You are operating an RLM (Recursive Language Model) workflow. RLM is **not** a bigger prompt — it is a loop where a controller LLM writes Python in a REPL, executes it against external context, fires sub-LLM calls, and emits a final answer.
+You are operating an RLM (Recursive Language Model) workflow. RLM is **not** a bigger prompt - it is a loop where a controller LLM writes Python in a REPL, executes it against external context, fires sub-LLM calls, and emits a final answer.
 
 ## When to invoke
 
@@ -110,15 +110,15 @@ If the answer looks weak or the `ok` field is false, suggest `/rlm:inspect <traj
 
 - **Never put the raw context into the chat.** RLM's whole point is keeping context outside the model prompt. Pass paths, not contents.
 - **Prefer `llm_query_batched` over `rlm_query`** in the controller's REPL code. Most subtasks are extraction/classification/summary, which fan out cheap to Haiku.
-- **Prefer `FINAL_VAR(name)` over `FINAL(...)`** — bare `FINAL` parsing is brittle. The controller should create a named variable first, then emit `FINAL_VAR(name)`.
+- **Prefer `FINAL_VAR(name)` over `FINAL(...)`** - bare `FINAL` parsing is brittle. The controller should create a named variable first, then emit `FINAL_VAR(name)`.
 - **Default sandbox is IPython subprocess.** It gives hard cell timeouts and kernel isolation. Use `local` only when the user explicitly opts in and the content is trusted.
 - **Redact obvious secrets** (API keys, tokens) from context before chunks are sent to submodels. The planner runs a regex sweep; warn if hits are detected.
 - **API keys never go into the REPL.** The `LMHandler` brokers calls host-side. If the user asks you to put `ANTHROPIC_API_KEY` in chunked context, refuse.
 
 ## References
 
-- `references/rlm-runtime-contract.md` — REPL contract, FINAL_VAR rules, message-history shape
-- `references/use-cases.md` — Catalog of supported input types with recommended config
-- `references/model-routing.md` — Why Opus/Sonnet/Haiku map to specific depths
-- `references/target-detection.md` — How to classify a target before planning
-- `references/modes.md` — Min/default/max profile reference
+- `references/rlm-runtime-contract.md` - REPL contract, FINAL_VAR rules, message-history shape
+- `references/use-cases.md` - Catalog of supported input types with recommended config
+- `references/model-routing.md` - Why Opus/Sonnet/Haiku map to specific depths
+- `references/target-detection.md` - How to classify a target before planning
+- `references/modes.md` - Min/default/max profile reference

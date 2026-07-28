@@ -14,7 +14,7 @@ script applies a small set of heuristics and writes a `grade` field:
       "needs_review": bool      # heuristic isn't confident; flag for human
     }
 
-Grading rules (heuristic, NOT ground truth — that's the whole point of
+Grading rules (heuristic, NOT ground truth - that's the whole point of
 the `needs_review` flag):
 
   verdict=rlm, outcome.ran=rlm:

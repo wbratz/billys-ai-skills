@@ -8,9 +8,9 @@ RLM has three classes of LLM calls, each with very different cost/capability pro
 
 | Call type | Frequency per run | Reasoning required |
 |---|---|---|
-| **Root controller** (depth 0) | 1 conversation, ~6-20 turns | Highest — plans decomposition, writes Python, synthesizes |
-| **Child RLM** (depth 1+) | 0-N parallel sub-loops | Moderate — multi-step reasoning over a sub-chunk |
-| **`llm_query` one-shot** | 10s to 100s, parallel | Low — extract, classify, summarize one chunk |
+| **Root controller** (depth 0) | 1 conversation, ~6-20 turns | Highest - plans decomposition, writes Python, synthesizes |
+| **Child RLM** (depth 1+) | 0-N parallel sub-loops | Moderate - multi-step reasoning over a sub-chunk |
+| **`llm_query` one-shot** | 10s to 100s, parallel | Low - extract, classify, summarize one chunk |
 
 Right model for each job:
 
@@ -22,13 +22,13 @@ Right model for each job:
 
 | Mode | Root (depth 0) | Depth 1 (`other_backend_client`) | Depth 2 (explicit `model=`) | `llm_query` default |
 |---|---|---|---|---|
-| **min** | `claude-sonnet-4-6` | — (max_depth=1) | — | `claude-haiku-4-5-20251001` |
-| **default** | `claude-opus-4-7` | `claude-sonnet-4-6` | — (max_depth=2) | `claude-haiku-4-5-20251001` |
+| **min** | `claude-sonnet-4-6` | - (max_depth=1) | - | `claude-haiku-4-5-20251001` |
+| **default** | `claude-opus-4-7` | `claude-sonnet-4-6` | - (max_depth=2) | `claude-haiku-4-5-20251001` |
 | **max** | `claude-opus-4-7` | `claude-sonnet-4-6` | `claude-haiku-4-5-20251001` | `claude-haiku-4-5-20251001` |
 
 ### Why Sonnet root in min mode
 
-Min mode runs on small, well-defined tasks (single doc <50KB, short logs). Opus on these is overkill — Sonnet writes adequate REPL code, decomposes simple chunks, and synthesizes a few results just fine. Saves ~5x on the controller cost.
+Min mode runs on small, well-defined tasks (single doc <50KB, short logs). Opus on these is overkill - Sonnet writes adequate REPL code, decomposes simple chunks, and synthesizes a few results just fine. Saves ~5x on the controller cost.
 
 ### Why Opus root in default/max
 
@@ -36,7 +36,7 @@ These modes run on tasks where the controller's decomposition decisions multiply
 
 ### Why Haiku at depth 2 in max mode
 
-Default `rlms` depth routing only distinguishes depth 0 from depth 1. At depth 2 the controller would fall back to the default model (Opus) — runaway cost. So the skill instructs the depth-1 controller to pass `rlm_query(prompt, model="claude-haiku-4-5-20251001")` explicitly when it wants to recurse into Haiku-bound subtasks. This keeps the depth-2 fanout cheap.
+Default `rlms` depth routing only distinguishes depth 0 from depth 1. At depth 2 the controller would fall back to the default model (Opus) - runaway cost. So the skill instructs the depth-1 controller to pass `rlm_query(prompt, model="claude-haiku-4-5-20251001")` explicitly when it wants to recurse into Haiku-bound subtasks. This keeps the depth-2 fanout cheap.
 
 ## Wiring in `rlm_run.py`
 
@@ -80,4 +80,4 @@ Per-mode token-cost coefficients (input + output blended, $ per 1M tokens, as of
 - `claude-sonnet-4-6`: ~$3-15
 - `claude-haiku-4-5-20251001`: ~$0.80-4
 
-The planner uses these to print a low/high estimate in the plan. Numbers are approximate — actual cost varies by prompt caching, batch discounts, and routing.
+The planner uses these to print a low/high estimate in the plan. Numbers are approximate - actual cost varies by prompt caching, batch discounts, and routing.

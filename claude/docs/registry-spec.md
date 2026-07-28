@@ -39,4 +39,4 @@ A namespace prefix (e.g., `billyz/`, `acme/`) is claimed by the first author to 
 
 ## Deprecation
 
-Never delete a registry entry — set `deprecated: true` and optionally `replaces`. This preserves install history and allows graceful migration messaging.
+Never delete a registry entry - set `deprecated: true` and optionally `replaces`. This preserves install history and allows graceful migration messaging.

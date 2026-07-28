@@ -12,17 +12,17 @@ Three named profiles for budget/safety caps. Pick at plan time or let the planne
 
 ## When each is right
 
-**min** — single doc Q&A, single short log, simple extraction. No recursion; just root + parallel `llm_query` fanout. Cheapest. Fastest to fail-or-finish.
+**min** - single doc Q&A, single short log, simple extraction. No recursion; just root + parallel `llm_query` fanout. Cheapest. Fastest to fail-or-finish.
 
-**default** — the doc's recommended baseline. Corpus QA, directory analysis, most PDF synthesis, multi-doc research with moderate fanout. This is what 80% of real runs should use.
+**default** - the doc's recommended baseline. Corpus QA, directory analysis, most PDF synthesis, multi-doc research with moderate fanout. This is what 80% of real runs should use.
 
-**max** — deep hierarchical synthesis where the structure of the task is genuinely tree-like. Monorepo audits, multi-PDF research where each PDF itself needs decomposition, exhaustive cross-corpus comparisons. Requires explicit `--max-budget=$X` to run as a guardrail.
+**max** - deep hierarchical synthesis where the structure of the task is genuinely tree-like. Monorepo audits, multi-PDF research where each PDF itself needs decomposition, exhaustive cross-corpus comparisons. Requires explicit `--max-budget=$X` to run as a guardrail.
 
 ## Why these specific values
 
 ### Depth
 
-Going deeper than 2 multiplies cost by the fanout factor at each level — if root fires 8 subcalls and each fires 8, depth 3 = 64 sub-RLMs. The RLM paper itself flags recursion as worth it "only when the subtask itself needs multi-step reasoning." Most subtasks (extract, classify, summarize) want `llm_query` to Haiku, not `rlm_query`. So depth 2 is the right ceiling for typical work; depth 3 is reserved for genuinely hierarchical tasks.
+Going deeper than 2 multiplies cost by the fanout factor at each level - if root fires 8 subcalls and each fires 8, depth 3 = 64 sub-RLMs. The RLM paper itself flags recursion as worth it "only when the subtask itself needs multi-step reasoning." Most subtasks (extract, classify, summarize) want `llm_query` to Haiku, not `rlm_query`. So depth 2 is the right ceiling for typical work; depth 3 is reserved for genuinely hierarchical tasks.
 
 ### Iterations
 
@@ -30,11 +30,11 @@ Going deeper than 2 multiplies cost by the fanout factor at each level — if ro
 
 ### Timeout
 
-300s is 5 minutes — enough for most fanouts to complete at 8-wide Haiku concurrency. The timeout is checked between iterations, so the IPython subprocess `cell_timeout=30s` and `subcall_timeout` give inner-loop protection. Max mode allows 900s (15 min) for genuinely large hierarchical runs.
+300s is 5 minutes - enough for most fanouts to complete at 8-wide Haiku concurrency. The timeout is checked between iterations, so the IPython subprocess `cell_timeout=30s` and `subcall_timeout` give inner-loop protection. Max mode allows 900s (15 min) for genuinely large hierarchical runs.
 
 ### Concurrency
 
-This is the **breadth lever** — the doc's #1 community improvement. Fanout latency scales as `chunks / concurrency`:
+This is the **breadth lever** - the doc's #1 community improvement. Fanout latency scales as `chunks / concurrency`:
 
 - 50 chunks at 4-wide = 13 rounds (~3 min if each round is ~12s)
 - 50 chunks at 8-wide = 7 rounds (~1.5 min)
