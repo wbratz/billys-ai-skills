@@ -43,5 +43,8 @@ jobs:
       - name: Test Codex RLM runner
         run: python3 -m unittest discover -s openai/plugins/rlm-codex/tests -p "test_*.py" -v
 
+      - name: Test credential-free demo
+        run: ./demo/run.sh > /dev/null
+
       - name: Compile Python sources
         run: python3 -m compileall -q claude/plugins openai/plugins

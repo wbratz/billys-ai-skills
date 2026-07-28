@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title description">
+  <title id="title">RLM Codex terminal demonstration</title>
+  <desc id="description">A terminal conversation asks RLM to compare a product requirement with implementation evidence and identify launch risks.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101820"/>
+      <stop offset="1" stop-color="#071016"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" fill="#050a0e"/>
+  <circle cx="1080" cy="90" r="220" fill="#10b981" opacity=".05"/>
+  <circle cx="100" cy="650" r="260" fill="#22d3ee" opacity=".035"/>
+  <rect x="55" y="42" width="1090" height="636" rx="18" fill="url(#shell)" stroke="#263641" filter="url(#shadow)"/>
+  <path d="M55 101H1145" stroke="#263641"/>
+  <circle cx="88" cy="72" r="7" fill="#ff6b6b"/>
+  <circle cx="112" cy="72" r="7" fill="#ffd166"/>
+  <circle cx="136" cy="72" r="7" fill="#62d996"/>
+  <text x="600" y="79" text-anchor="middle" fill="#748694" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">codex · rlm-codex</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">
+    <text x="88" y="143" fill="#64e5b5">$ codex</text>
+    <text x="88" y="184" fill="#8fa3b2">&gt; Use RLM over examples/product-launch.</text>
+    <text x="88" y="218" fill="#e8f0f5">&gt; What changed between the PRD and implementation,</text>
+    <text x="112" y="250" fill="#e8f0f5">and what launch risks remain?</text>
+
+    <text x="88" y="304" fill="#22d3ee">RLM</text>
+    <text x="146" y="304" fill="#e8f0f5">Collected 5 source files into 9 chunks.</text>
+    <text x="88" y="340" fill="#64e5b5">✓</text>
+    <text x="120" y="340" fill="#b9c8d2">Scale changed: 250,000 → 100,000 records.</text>
+    <text x="88" y="374" fill="#64e5b5">✓</text>
+    <text x="120" y="374" fill="#b9c8d2">Retention changed: 30 days → 7 days.</text>
+
+    <text x="88" y="424" fill="#f5c76b">Launch recommendation</text>
+    <text x="88" y="458" fill="#e8f0f5">Limited beta. General availability is blocked by:</text>
+    <text x="112" y="494" fill="#b9c8d2">1. stale UI and API promises</text>
+    <text x="112" y="528" fill="#b9c8d2">2. non-durable download audit events</text>
+    <text x="112" y="562" fill="#b9c8d2">3. missing queue alert and support runbook</text>
+
+    <text x="88" y="618" fill="#748694">Sources: PRD · architecture · decisions · launch review</text>
+    <text x="88" y="650" fill="#64e5b5">Confidence: High</text>
+  </g>
+</svg>

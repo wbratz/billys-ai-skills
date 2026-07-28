@@ -1,7 +1,10 @@
 # Billy's AI Skills
 
 [![Validate marketplaces](https://github.com/wbratz/billys-ai-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/wbratz/billys-ai-skills/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/wbratz/billys-ai-skills?color=22c55e)](https://github.com/wbratz/billys-ai-skills/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10A37F.svg)](LICENSE)
+
+![Billy's AI Skills maps a large source field through a controller and focused agents into an evidence-backed result.](assets/social-preview.png)
 
 Production-minded plugins for giving coding agents more reach without giving
 them less discipline.
@@ -42,6 +45,24 @@ This is useful for:
 
 It is usually unnecessary for a narrow edit, one small file, or a question that
 ordinary search can answer directly.
+
+## See it work
+
+The repository includes a fictional product-launch packet with deliberate
+contradictions between its PRD, implementation, decision log, and launch
+review. The demo executes the real Codex runner in dry-run mode, then shows a
+recorded source-cited synthesis from a live workflow.
+
+![A Codex terminal conversation uses RLM to compare a PRD, architecture, decisions, and launch review.](assets/terminal-demo.svg)
+
+```bash
+./demo/run.sh
+```
+
+The dry run needs only Python 3.11 or newer. It does not require model
+credentials or spend API tokens. Inspect the
+[`examples/product-launch/`](examples/product-launch/) corpus and the
+[`recorded synthesis`](demo/expected-synthesis.md) directly.
 
 ## Plugin catalog
 
@@ -130,6 +151,8 @@ python3 -m unittest discover -s openai/plugins/rlm-codex/tests -p "test_*.py" -v
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete contributor workflow.
+
+Release history is documented in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
