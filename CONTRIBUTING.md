@@ -25,6 +25,7 @@ npm run validate --prefix claude/tools
 python3 scripts/validate_repository.py
 python3 -m unittest discover -s claude/plugins/billys-rlm-auto/tests -p "test_*.py" -v
 python3 -m unittest discover -s openai/plugins/rlm-codex/tests -p "test_*.py" -v
+./demo/run.sh
 python3 -m compileall -q claude/plugins openai/plugins
 ```
 
