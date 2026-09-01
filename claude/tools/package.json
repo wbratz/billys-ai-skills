@@ -7,6 +7,6 @@
     "lint": "node validate.js"
   },
   "dependencies": {
-    "js-yaml": "^5.2.2"
+    "js-yaml": "^5.4.1"
   }
 }
